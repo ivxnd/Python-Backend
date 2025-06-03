@@ -1,0 +1,5 @@
+# Archivos de configuración
+Lib/
+Include/
+Scripts/
+*.cfg

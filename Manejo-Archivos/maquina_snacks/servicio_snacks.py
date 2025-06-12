@@ -1,7 +1,7 @@
 import os.path
 from maquina_snacks import Snack
 
-class ServicioSnack:
+class ServicioSnacks:
     NOMBRE_ARCHIVO = './maquina_snacks/snacks.txt'
     
     def __init__(self):

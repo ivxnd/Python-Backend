@@ -3,3 +3,4 @@ Lib/
 Include/
 Scripts/
 *.cfg
+__pycache__/

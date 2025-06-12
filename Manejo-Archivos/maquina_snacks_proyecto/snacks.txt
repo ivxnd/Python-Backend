@@ -1,0 +1,5 @@
+1,Patatas,50
+2,Bocadillo,100
+3,Refresco,60
+4,Galletas,90.0
+5,Croissant,80.0

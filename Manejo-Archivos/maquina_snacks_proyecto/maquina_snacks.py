@@ -1,5 +1,5 @@
-from maquina_snacks.servicio_snacks import ServicioSnacks
-from maquina_snacks.snack import Snack
+from maquina_snacks_proyecto.servicio_snacks import ServicioSnacks
+from maquina_snacks_proyecto.snack import Snack
 
 class MaquinaSnacks:
     
@@ -21,12 +21,12 @@ class MaquinaSnacks:
                 print(f'Error: {e}')
     
     def mostrar_menu(self):
-        print(f''' Menu: 
-              1. Comprar Snack
-              2. Mostrar ticket
-              3. Agregar Nuevo Snack al Inventario
-              4. Mostrar Inventario Snacks
-              5. Salir ''')
+        print(f'''Menu:
+        1. Comprar snack
+        2. Mostrar ticket
+        3. Agregar Nuevo Snack al Inventario
+        4. Mostrar Inventario Snacks
+        5. Salir''')
         return int(input('Elige una opción: '))
     
     def ejecutar_opcion(self, opcion):
@@ -48,7 +48,7 @@ class MaquinaSnacks:
         
         id_snack = int(input('Introduce el ID del snack a comprar: '))
         snacks = self.__servicio_snacks.get_snacks()
-        snack = next((snack for snack in snacks if snack.id_snack == id_snack), None)
+        snack = next((snack for snack in snacks if snack.get_ID() == id_snack), None)
         
         if snack:
             self.productos.append(snack)
@@ -61,10 +61,10 @@ class MaquinaSnacks:
         if not self.productos:
             print('Lista de productos vacía')
             return
-        total = sum(snack.precio for snack in self.productos)
+        total = sum(snack.get_precio() for snack in self.productos)
         print('--- Ticket de Venta ---')
         for producto in self.productos:
-            print(f'\t- {producto.nombre} - ${producto.precio:.2f}')
+            print(f'\t- {producto.get_nombre()} - ${producto.get_precio():.2f}')
         print(f'\tTotal -> ${total:.2f}')
         
     def agregar_snack(self):

@@ -1,3 +1,5 @@
+# Seleccionamos registros desde python a mariaDB
+
 import mariadb
 
 # Creamos la conexión
@@ -15,3 +17,6 @@ resultado = cursor.fetchall()
 
 for persona in resultado:
     print(persona)
+    
+cursor.close()
+personas_db.close()

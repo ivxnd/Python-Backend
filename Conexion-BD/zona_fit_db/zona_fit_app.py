@@ -32,11 +32,12 @@ class AppZonaFit:
         try:
             if opcion == 1:
                 self.listar_clientes()
-            if opcion == 2:
+            elif opcion == 2:
                 self.agregar_cliente()
-            if opcion == 3:
+            elif opcion == 3:
                 self.modificar_cliente()
-            
+            elif opcion == 4:
+                self.eliminar_cliente()
             elif opcion == 5:
                 return True
             else:
@@ -82,6 +83,16 @@ class AppZonaFit:
             print('Cliente actualizado correctamente!')
         except Exception as e:
             print(f'Error al actualizar un cliente: {e}')
+    
+    def eliminar_cliente(self):
+        id_cliente = int(input('Introduce el ID del cliente a eliminar: '))
+        cliente_eliminar = Cliente(id=id_cliente)
+        
+        try:
+            self.get_clienteDAO().eliminar(cliente_eliminar)
+            print('Cliente eliminado correctamente!')
+        except Exception as e:
+            print(f'Error al eliminar un cliente: {e}')
 
 # Programa principal
 if __name__ == '__main__':

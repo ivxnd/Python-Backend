@@ -32,6 +32,8 @@ class AppZonaFit:
         try:
             if opcion == 1:
                 self.listar_clientes()
+            if opcion == 2:
+                self.agregar_cliente()
             
             elif opcion == 5:
                 return True
@@ -51,6 +53,19 @@ class AppZonaFit:
             
         except Exception as e:
             print(f'Error al listar clientes: {e}')
+            
+    def agregar_cliente(self):
+        nombre_cliente = input('Introduce el nombre del cliente: ')
+        apellido_cliente = input('Introduce el apellido del cliente: ')
+        membresia_cliente = int(input('Introduce la membresia del cliente: '))
+        nuevo_cliente = Cliente(nombre=nombre_cliente,apellido=apellido_cliente,
+                                membresia=membresia_cliente)
+        
+        try:
+            self.get_clienteDAO().insertar(nuevo_cliente)
+            print('Cliente agregado correctamente!')
+        except Exception as e:
+            print(f'Error al agregar el cliente: {e}')
 
 # Programa principal
 if __name__ == '__main__':

@@ -1,7 +1,11 @@
 from flask import Flask, render_template
 from cliente_dao import ClienteDAO
+from cliente import Cliente
+from cliente_forma import ClienteForma
 
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] = 'llave_secreta' # Ejemplo
 
 titulo_app = 'Zona Fit App'
 
@@ -13,8 +17,12 @@ def inicio():
     
     # Recuperamos los clientes de la BD
     clientes_db = ClienteDAO.seleccionar()
+    # Creamos el objeto cliente form vacio
+    cliente = Cliente()
+    cliente_forma = ClienteForma(obj=cliente)
     
-    return render_template('index.html', titulo=titulo_app, clientes=clientes_db)
+    return render_template('index.html', titulo=titulo_app, clientes=clientes_db,
+                           forma=cliente_forma)
 
 if __name__ == '__main__':
     app.run(debug=True)

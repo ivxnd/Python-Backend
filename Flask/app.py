@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from cliente_dao import ClienteDAO
 from cliente import Cliente
 from cliente_forma import ClienteForma
@@ -23,6 +23,20 @@ def inicio():
     
     return render_template('index.html', titulo=titulo_app, clientes=clientes_db,
                            forma=cliente_forma)
+
+@app.route('/guardar', methods=['POST'])
+def guardar():
+    # Creamos los objetos de cliente vacios
+    cliente = Cliente()
+    cliente_forma = ClienteForma(obj=cliente)
+    
+    if cliente_forma.validate_on_submit():
+        cliente_forma.populate_obj(cliente)
+
+        ClienteDAO.insertar(cliente)
+    else:
+        print(cliente_forma.errors)
+    return redirect(url_for('inicio'))
 
 if __name__ == '__main__':
     app.run(debug=True)

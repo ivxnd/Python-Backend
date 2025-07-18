@@ -20,6 +20,7 @@
                 <!-- Formulario -->
                 <form action="/guardar" method="post" autocomplete="off">
                     {{forma.csrf_token}}
+                    {{forma.id}}
                     <div class="form-floating py-2">
                         {{forma.nombre(class="form-control", placeholder="Nombre")}}
                         {{forma.nombre.label}}

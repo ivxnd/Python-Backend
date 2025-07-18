@@ -32,8 +32,13 @@ def guardar():
     
     if cliente_forma.validate_on_submit():
         cliente_forma.populate_obj(cliente)
-
-        ClienteDAO.insertar(cliente)
+        
+        if not cliente.id:
+            # Si no hay ID se inserta un nuevo cliente
+            ClienteDAO.insertar(cliente)
+        else:
+            # Si hay ID se actualiza el cliente
+            ClienteDAO.actualizar(cliente)
     else:
         print(cliente_forma.errors)
     return redirect(url_for('inicio'))
@@ -41,6 +46,16 @@ def guardar():
 @app.route('/limpiar')
 def limpiar():
     return redirect(url_for('inicio'))
+
+@app.route('/editar/<int:id>')
+def editar(id):
+    cliente = ClienteDAO.seleccionar_por_id(id)
+    cliente_forma = ClienteForma(obj=cliente)
+    clientes_db = ClienteDAO.seleccionar()
+    
+    return render_template('index.html', titulo=titulo_app,
+                           clientes=clientes_db,
+                           forma=cliente_forma)
 
 if __name__ == '__main__':
     app.run(debug=True)
